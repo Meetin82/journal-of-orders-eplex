@@ -1,61 +1,82 @@
-.login-container
-  display: flex
-  justify-content: center
-  align-items: center
-  min-height: 100vh
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7fafc; /* светлый фон, чтобы сделать форму мягче на фоне */
+}
 
-.login-card
-  width: 100%
-  max-width: 400px
-  padding: 2rem
-  background-color: white
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-  border-radius: 12px
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px; /* немного большие скругления для более мягкого вида */
+  border: 1px solid #e2e8f0; /* легкая граница для отделения */
+}
 
-.form-title
-  font-size: 1.75rem
-  font-weight: bold
-  text-align: center
-  color: #4a5568
-  margin-bottom: 1.5rem
+.form-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: #2d3748; /* более темный текст для лучшей читаемости */
+  margin-bottom: 2rem;
+  font-family: 'Roboto', sans-serif;
+}
 
-.form
-  display: flex
-  flex-direction: column
-  gap: 1rem
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
 
-.form-group
-  display: flex
-  flex-direction: column
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px; /* чуть меньше скругление для более современного вида */
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: #f9fafb;
+  font-family: 'Roboto', sans-serif;
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
 
-.label
-  font-size: 1rem
-  color: #4a5568
-  margin-bottom: 0.5rem
+.input-field:focus {
+  border-color: #3182ce;
+  outline: none;
+  background-color: #ffffff; /* более чистый белый фон при фокусе */
+}
 
-.input-field
-  width: 100%
-  padding: 1rem
-  border: 1px solid #e2e8f0
-  border-radius: 8px
-  transition: border-color 0.2s ease-in-out
-  font-size: 1rem
-  color: #2d3748
+.input-field::placeholder {
+  color: #a0aec0; /* чуть более светлый цвет для текста в placeholder */
+}
 
-.input-field:focus
-  border-color: #3182ce
-  outline: none
+.input-field:disabled {
+  background-color: #edf2f7; /* состояние для отключенных полей */
+}
 
-.button
-  width: 100%
-  padding: 1rem
-  background-color: #3182ce
-  color: white
-  border-radius: 8px
-  font-weight: bold
-  font-size: 1rem
-  cursor: pointer
-  transition: background-color 0.3s ease
+.button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #3182ce;
+  color: white;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1.1rem; /* чуть больше шрифт, чтобы кнопка была заметнее */
+  cursor: pointer;
+  margin-top: 1.5rem;
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-.button:hover
-  background-color: #2b6cb0
+.button:hover {
+  background-color: #2b6cb0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.button:focus {
+  outline: none;
+}
+

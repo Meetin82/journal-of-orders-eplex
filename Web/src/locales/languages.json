@@ -6,7 +6,12 @@
       "password": "Пароль",
       "enter_username": "Введите логин",
       "enter_password": "Введите пароль",
-      "submit": "Войти"
+      "submit": "Войти",
+      "username_required": "Поле логина обязательно",
+      "password_required": "Поле пароля обязательно",
+      "success": "Вход успешен!",
+      "failed": "Ошибка входа. Попробуйте снова.",
+      "required_fields": "Пожалуйста, заполните все обязательные поля."
     },
     "orders_table": {
       "source": "Источник",
@@ -44,7 +49,12 @@
       "password": "Password",
       "enter_username": "Enter username",
       "enter_password": "Enter password",
-      "submit": "Login"
+      "submit": "Login",
+      "username_required": "Username field is required",
+      "password_required": "Password field is required",
+      "success": "Login successful!",
+      "failed": "Login failed. Please try again.",
+      "required_fields": "Please fill in all required fields."
     },
     "orders_table": {
       "source": "Source",
