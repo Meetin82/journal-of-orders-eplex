@@ -1,0 +1,78 @@
+{
+  "ru": {
+    "login": {
+      "title": "Вход в систему",
+      "username": "Логин",
+      "password": "Пароль",
+      "enter_username": "Введите логин",
+      "enter_password": "Введите пароль",
+      "submit": "Войти"
+    },
+    "orders_table": {
+      "source": "Источник",
+      "order_id": "Номер заказа",
+      "order_date": "Дата заказа",
+      "article": "Артикул",
+      "brand": "Бренд",
+      "product_name": "Наименование товара",
+      "quantity": "Количество",
+      "price": "Цена за ед.",
+      "total": "Сумма",
+      "status": "Статус",
+      "received": "Получено",
+      "rejected": "Отказано",
+      "in_delivery": "В доставке",
+      "expected_delivery": "Ожидаемая дата доставки",
+      "guaranteed_delivery": "Гарантируемая дата доставки",
+      "comment": "Комментарий",
+      "supplier": "Поставщик",
+      "user": "Пользователь"
+    },
+    "actions": {
+      "refresh": "Обновить"
+    },
+    "language": {
+      "russian": "Русский",
+      "english": "English"
+    },
+    "title": "Journal For Orders (EPLEX)"
+  },
+  "en": {
+    "login": {
+      "title": "Login to the system",
+      "username": "Username",
+      "password": "Password",
+      "enter_username": "Enter username",
+      "enter_password": "Enter password",
+      "submit": "Login"
+    },
+    "orders_table": {
+      "source": "Source",
+      "order_id": "Order ID",
+      "order_date": "Order Date",
+      "article": "Article",
+      "brand": "Brand",
+      "product_name": "Product Name",
+      "quantity": "Quantity",
+      "price": "Price per unit",
+      "total": "Total",
+      "status": "Status",
+      "received": "Received",
+      "rejected": "Rejected",
+      "in_delivery": "In delivery",
+      "expected_delivery": "Expected delivery date",
+      "guaranteed_delivery": "Guaranteed delivery date",
+      "comment": "Comment",
+      "supplier": "Supplier",
+      "user": "User"
+    },
+    "actions": {
+      "refresh": "Refresh"
+    },
+    "language": {
+      "russian": "Русский",
+      "english": "English"
+    },
+    "title": "Journal For Orders (EPLEX)"
+  }
+}

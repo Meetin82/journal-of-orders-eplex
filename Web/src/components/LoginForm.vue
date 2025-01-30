@@ -1,29 +1,60 @@
 <template>
-  <div class="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-    <h2 class="text-2xl font-bold mb-4">Вход</h2>
-    <input v-model="username" type="text" placeholder="Логин" class="input mb-2" />
-    <input v-model="password" type="password" placeholder="Пароль" class="input mb-2" />
-    <button @click="login" class="btn">Войти</button>
+  <div class="login-container">
+    <div class="login-card">
+      <h2 class="form-title">{{ $t('login.title') }}</h2>
+      <div class="form-group">
+        <label class="label">{{ $t('login.username') }}</label>
+        <DxTextBox
+            v-model="username"
+            :placeholder="$t('login.enter_username')"
+            class="input-field"
+        />
+      </div>
+      <div class="form-group">
+        <label class="label">{{ $t('login.password') }}</label>
+        <DxTextBox
+            v-model="password"
+            type="password"
+            :placeholder="$t('login.enter_password')"
+            class="input-field"
+        />
+      </div>
+      <DxButton @click="login" class="button">{{ $t('login.submit') }}</DxButton>
+    </div>
   </div>
 </template>
 
 <script>
-import {useAuthStore} from "@/stores/auth";
+import {DxTextBox} from 'devextreme-vue/text-box';
+import {DxButton} from 'devextreme-vue/button';
+import {useAuthStore} from '../stores/auth';
 
 export default {
-  name: "LoginForm",
+  components: {
+    DxTextBox,
+    DxButton,
+  },
   data() {
     return {
-      username: "",
-      password: "",
+      username: '',
+      password: ''
     };
   },
   methods: {
     async login() {
-      const authStore = useAuthStore();
-      await authStore.login(this.username, this.password);
-      this.$router.push("/orders");
-    },
-  },
+      if (!this.username || !this.password) {
+        alert('Both username and password are required.');
+        return;
+      }
+
+      try {
+        await useAuthStore().login(this.username, this.password);
+        this.$router.push('/orders');
+      } catch (error) {
+        console.error('Login failed:', error);
+        alert('Login failed, please try again.');
+      }
+    }
+  }
 };
 </script>

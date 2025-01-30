@@ -1,18 +1,17 @@
-import api from "@/api/axiosInstance.js";
-import {defineStore} from "pinia";
+import { defineStore } from 'pinia';
+import axios from '../api/axiosInstance';
+import { useAuthStore } from './auth';
 
-export const useOrdersStore = defineStore("orders", {
-    state: () => ({orders: []}),
+export const useOrdersStore = defineStore('orders', {
+    state: () => ({ orders: [] }),
     actions: {
         async fetchOrders() {
-            try {
-                const response = await api.get("/orders", {
-                    params: {dfrom: "2025-01-27 00:00:00", dto: "2025-01-29 23:59:59"},
-                });
-                this.orders = response.data.data;
-            } catch (error) {
-                console.error("Ошибка загрузки заказов", error);
-            }
+            const authStore = useAuthStore();
+            const response = await axios.get('orders/orders', { headers: { 'X-Eplex-Token': authStore.token } });
+            this.orders = response.data.data;
         },
-    },
+        async refreshOrders() {
+            await this.fetchOrders();
+        }
+    }
 });

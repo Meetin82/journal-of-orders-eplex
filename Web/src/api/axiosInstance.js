@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
-const api = axios.create({
-    baseURL: "https://api.eplex.ru/v2",
-    headers: { "Content-Type": "application/json" },
+const instance = axios.create({
+    baseURL: 'https://api.eplex.ru/v2/',
+    proxy: false  // Отключаем прокси, если оно не нужно
 });
 
-export default api;
+export default instance;

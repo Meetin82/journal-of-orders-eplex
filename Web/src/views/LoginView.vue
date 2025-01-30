@@ -1,9 +1,9 @@
 <template>
-  <LoginForm />
+  <div class='container mx-auto'>
+    <LoginForm />
+  </div>
 </template>
-
 <script>
-import LoginForm from "@/components/LoginForm.vue";
-
-export default {components: {LoginForm}};
+import LoginForm from '../components/LoginForm.vue';
+export default { components: { LoginForm } };
 </script>

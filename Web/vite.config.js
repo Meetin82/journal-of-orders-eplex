@@ -12,7 +12,14 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      stylus: {
+        additionalData: `@require "@/assets/styles/*.styl";`,  // Подключает все стили из src/assets/styles
+      },
     },
   },
 })

@@ -1,36 +1,34 @@
-import { defineStore } from "pinia";
-import api from "@/api/axiosInstance.js";
+import { defineStore } from 'pinia';
+import axios from '../api/axiosInstance';
 
-export const useAuthStore = defineStore("auth", {
-    state: () => ({
-        token: localStorage.getItem("token") || null,
-    }),
-
-    getters: {
-        isAuthenticated: (state) => !!state.token,
-    },
-
+export const useAuthStore = defineStore('auth', {
+    state: () => ({ token: null }),
     actions: {
         async login(username, password) {
+            const requestData = {
+                frontend: {
+                    WEB: {},  // Метаинформация для аналитики может быть пустой
+                    name: 'WEB',
+                    tz: 'Europe/Moscow',
+                    userpc: '@WIN-EPX'
+                },
+                login: username,
+                password: password
+            };
+
             try {
-                const response = await api.post("/auth", {
-                    frontend: { WEB: {}, name: "WEB", tz: "Europe/Moscow", userpc: "@WIN-EPX" },
-                    login: username,
-                    password,
+                const response = await axios.post('auth', requestData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
                 });
-
+                console.log('Response:', response);
                 this.token = response.data.token;
-                localStorage.setItem("token", this.token); // Сохранение в localStorage
-                api.defaults.headers["X-Eplex-Token"] = this.token;
             } catch (error) {
-                console.error("Ошибка авторизации", error);
+                console.error('Login failed:', error.response || error); // Добавьте log для error.response
+                throw error;
             }
-        },
 
-        logout() {
-            this.token = null;
-            localStorage.removeItem("token"); // Удаление токена из localStorage
-            delete api.defaults.headers["X-Eplex-Token"];
-        },
-    },
+        }
+    }
 });
