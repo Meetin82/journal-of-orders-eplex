@@ -1,0 +1,35 @@
+.language-selector {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: auto;
+}
+
+.language-select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #3182ce;
+  background-color: #f9fafb;
+  border: 1px solid #3182ce; /* чёрная обводка */
+  border-radius: 12px;
+  font-family: 'Roboto', sans-serif;
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.language-select:focus {
+  border-color: #3182ce;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.language-select option {
+  background-color: #f9fafb;
+  color: #2d3748;
+}
+
+.language-select:disabled {
+  background-color: #edf2f7;
+  }
