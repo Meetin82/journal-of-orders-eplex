@@ -1,36 +1,35 @@
 import {defineStore} from 'pinia';
 import instance from "../api/axiosInstance";
+import router from "@/router/index.js";
 
 export const useAuthStore = defineStore('auth', {
-    state: () => ({token: null}),
+    state: () => ({
+        token: localStorage.getItem('authToken') || null
+    }),
     actions: {
         async login(username, password) {
-            const requestData = {
-                frontend: {
-                    WEB: {},
-                    name: 'WEB',
-                    tz: 'Europe/Moscow',
-                    userpc: '@WIN-EPX',
-                },
-                login: username,
-                password: password,
-            };
-
             try {
-                delete instance.defaults.headers.common["XMLHttpRequest"];
-                const response = await instance.post('auth', requestData);
-                console.log('Response:', response);
+                const response = await instance.post("auth", {
+                    frontend: {
+                        WEB: {},
+                        name: "WEB",
+                        tz: "Europe/Moscow",
+                        userpc: "@WIN-EPX",
+                    },
+                    login: username,
+                    password: password,
+                });
+
                 this.token = response.data.token;
+                localStorage.setItem("authToken", response.data.token);
             } catch (error) {
-                if (error.response) {
-                    console.error('Response Error:', error.response);
-                } else if (error.request) {
-                    console.error('Request Error:', error.request);
-                } else {
-                    console.error('General Error:', error.message);
-                }
                 throw error;
             }
         },
+        logout() {
+            this.token = null;
+            localStorage.removeItem('authToken');
+            router.push("/");
+        }
     },
 });

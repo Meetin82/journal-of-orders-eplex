@@ -11,7 +11,8 @@
       "password_required": "Поле пароля обязательно",
       "success": "Вход успешен!",
       "failed": "Ошибка входа. Попробуйте снова.",
-      "required_fields": "Пожалуйста, заполните все обязательные поля."
+      "required_fields": "Пожалуйста, заполните все обязательные поля.",
+      "session_expired": "Время сессии истекло. Пожалуйста, войдите заново."
     },
     "orders_table": {
       "source": "Источник",
@@ -34,7 +35,8 @@
       "user": "Пользователь"
     },
     "actions": {
-      "refresh": "Обновить"
+      "refresh": "Обновить",
+      "logout": "Выйти из аккаунта"
     },
     "language": {
       "russian": "Русский",
@@ -54,7 +56,9 @@
       "password_required": "Password field is required",
       "success": "Login successful!",
       "failed": "Login failed. Please try again.",
-      "required_fields": "Please fill in all required fields."
+      "required_fields": "Please fill in all required fields.",
+      "session_expired": "Session expired. Please log in again."
+
     },
     "orders_table": {
       "source": "Source",
@@ -77,7 +81,8 @@
       "user": "User"
     },
     "actions": {
-      "refresh": "Refresh"
+      "refresh": "Refresh",
+      "logout": "Log out of your account"
     },
     "language": {
       "russian": "Русский",

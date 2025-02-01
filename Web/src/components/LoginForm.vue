@@ -1,5 +1,9 @@
 <template>
   <div class="login-container">
+    <div class="language-selector-wrapper">
+      <LanguageSelector/>
+    </div>
+
     <div class="login-card">
       <h2 class="form-title">{{ $t('login.title') }}</h2>
 
@@ -14,10 +18,11 @@
               @value-changed="validateField('username')"
           >
             <DxValidator>
-              <DxRequiredRule :message="$t('login.username_required')" />
+              <DxRequiredRule :message="$t('login.username_required')"/>
             </DxValidator>
           </DxTextBox>
         </div>
+
         <div class="input-group">
           <DxTextBox
               v-model="password"
@@ -29,7 +34,7 @@
               @value-changed="validateField('password')"
           >
             <DxValidator>
-              <DxRequiredRule :message="$t('login.password_required')" />
+              <DxRequiredRule :message="$t('login.password_required')"/>
             </DxValidator>
           </DxTextBox>
         </div>
@@ -37,7 +42,7 @@
 
       <DxButton
           @click="login"
-          class="button"
+          :elementAttr="{ class: 'button' }"
           :disabled="isSubmitDisabled"
       >
         {{ $t('login.submit') }}
@@ -47,50 +52,80 @@
 </template>
 
 <script>
-import { DxTextBox } from 'devextreme-vue/text-box';
-import { DxButton } from 'devextreme-vue/button';
-import { DxValidator, DxRequiredRule } from 'devextreme-vue/validator';
-import { DxValidationGroup } from 'devextreme-vue/validation-group';
-import { useAuthStore } from '../stores/auth';
+
+import {DxTextBox} from 'devextreme-vue/text-box';
+import {DxButton} from 'devextreme-vue/button';
+import {DxValidator, DxRequiredRule} from 'devextreme-vue/validator';
+import {DxValidationGroup} from 'devextreme-vue/validation-group';
+import {useAuthStore} from '../stores/auth';
+import LanguageSelector from "@/components/LanguageSelector.vue";
 
 export default {
+  name: "LoginForm",
   components: {
+    LanguageSelector,
     DxTextBox,
     DxButton,
     DxValidator,
     DxRequiredRule,
     DxValidationGroup
   },
+
+  setup() {
+    const authStore = useAuthStore();
+
+    return {
+      authStore
+    }
+  },
+
   data() {
+
     return {
       username: '',
       password: '',
     };
   },
+
   computed: {
+
     isSubmitDisabled() {
       return !(this.username && this.password);
     }
   },
+
   methods: {
+
     validateField(field) {
-      // Валидировать поле при изменении
       this.$refs.validationGroupRef.instance.validate();
     },
-    async login() {
-      // Проверка валидности всей формы
-      const validationResult = await this.$refs.validationGroupRef.instance.validate();
 
-      if (validationResult.isValid) {
+    async validateForm() {
+      const validationResult = await this.$refs.validationGroupRef.instance.validate();
+      return validationResult.isValid;
+    },
+
+    async handleLoginError(error) {
+      this.username = '';
+      this.password = '';
+
+      if (error.response && error.response.status === 417 && error.response.data && error.response.data.err) {
+        this.$toast.error(error.response.data.err);
+      } else {
+        this.$toast.error(this.$t('login.failed'));
+      }
+    },
+
+    async login() {
+      const isValid = await this.validateForm();
+
+      if (isValid) {
         try {
-          await useAuthStore().login(this.username, this.password);
+          await this.authStore.login(this.username, this.password);
           this.$router.push('/orders');
           this.$toast.success(this.$t('login.success'));
         } catch (error) {
-          console.error('Login failed:', error);
-          this.username = '';
-          this.password = '';
-          this.$toast.error(this.$t('login.failed'));
+          await this.handleLoginError(error);
         }
       } else {
         this.$toast.warning(this.$t('login.required_fields'));
